@@ -10,10 +10,10 @@ I developed a native Windows Desktop application using `CustomTkinter`. This too
 
 ## 🚀 Technical Highlights
 This project demonstrates advanced Python Software Engineering skills:
-* **Multithreading:** Heavy ETL data extractions and server booting run on background `daemon` threads to ensure the UI remains 100% responsive[span_8](start_span)[span_8](end_span).
-* **Thread-Safe UI Updates:** Implemented a robust `queue.Queue` pattern to allow background threads to safely pass UI update requests back to the main `tkinter` event loop[span_9](start_span)[span_9](end_span).
-* **Console Redirection:** Custom class to hijack `sys.stdout` and pipe all print statements directly into a stylized in-app terminal window[span_10](start_span)[span_10](end_span).
-* **Dynamic GUI:** Adaptive Dark/Light mode depending on system settings[span_11](start_span)[span_11](end_span).
+* **Multithreading:** Heavy ETL data extractions and server booting run on background `daemon` threads to ensure the UI remains 100% responsive.
+* **Thread-Safe UI Updates:** Implemented a robust `queue.Queue` pattern to allow background threads to safely pass UI update requests back to the main `tkinter` event loop.
+* **Console Redirection:** Custom class to hijack `sys.stdout` and pipe all print statements directly into a stylized in-app terminal window.
+* **Dynamic GUI:** Adaptive Dark/Light mode depending on system settings.
 
 ## 📸 Interface Preview
 *(The GUI launching the automated data extraction and logging the output)*
