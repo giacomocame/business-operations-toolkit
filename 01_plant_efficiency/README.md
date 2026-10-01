@@ -20,3 +20,4 @@ I engineered an automated Python ETL pipeline that bypasses Excel entirely. Inst
 
 ## 📸 Sneak Peek
 ![Dashboard Overview](assets/dashboard_overview.png)
+![Dashboard Overview](assets/dashboard_overview2.png)
