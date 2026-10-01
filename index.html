@@ -9,37 +9,77 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; }
+        :root { color-scheme: dark; }
+        body.light-mode { color-scheme: light; }
+        
+        /* Variabili dinamiche derivate dal tuo Design System */
+        :root {
+            --bg-deep: #0B0D10;
+            --ago-hue: rgba(79, 209, 197, 0.12);
+            --ped-hue: rgba(255, 122, 51, 0.12);
+            --text-1: #EDEFF2;
+            --text-2: #8A8F98;
+            --border: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-hover: rgba(255, 255, 255, 0.05);
+            --accent: #4FD1C5;
+            --btn-bg: rgba(255, 255, 255, 0.06);
+        }
+        body.light-mode {
+            --bg-deep: #F2F0EA;
+            --ago-hue: rgba(62, 124, 177, 0.12);
+            --ped-hue: rgba(201, 132, 62, 0.12);
+            --text-1: #17181A;
+            --text-2: #5B5F66;
+            --border: rgba(0, 0, 0, 0.09);
+            --card-bg: rgba(0, 0, 0, 0.025);
+            --card-hover: rgba(0, 0, 0, 0.05);
+            --accent: #2F8F86;
+            --btn-bg: rgba(0, 0, 0, 0.04);
+        }
+        
         body { 
             margin: 0; padding: 0; 
-            background-color: #0B0D10; color: #EDEFF2; 
+            background-color: var(--bg-deep); color: var(--text-1); 
             font-family: 'Space Grotesk', sans-serif; 
             line-height: 1.6;
             position: relative;
             min-height: 100vh;
+            transition: background-color 0.35s ease, color 0.35s ease;
         }
-        /* Effetto glow di sfondo come nelle dashboard */
         body::before {
             content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
             background: 
-                radial-gradient(circle at 15% 10%, rgba(79, 209, 197, 0.08), transparent 45%),
-                radial-gradient(circle at 85% 90%, rgba(255, 122, 51, 0.08), transparent 45%);
+                radial-gradient(circle at 15% 10%, var(--ago-hue), transparent 45%),
+                radial-gradient(circle at 85% 90%, var(--ped-hue), transparent 45%);
+            transition: background 0.35s ease;
         }
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
         
         /* Header & Intro */
-        header { margin-bottom: 50px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 30px; }
-        .eyebrow { font-family: 'IBM Plex Mono', monospace; color: #4FD1C5; font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        header { margin-bottom: 50px; border-bottom: 1px solid var(--border); padding-bottom: 30px; position: relative; }
+        .eyebrow { font-family: 'IBM Plex Mono', monospace; color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; display: block; }
         h1 { font-size: 38px; margin: 0 0 16px 0; font-weight: 700; letter-spacing: -0.02em; }
-        .intro-text { color: #8A8F98; font-size: 16px; max-width: 800px; }
-        .intro-text strong { color: #EDEFF2; font-weight: 600; }
+        .intro-text { color: var(--text-2); font-size: 16px; max-width: 800px; }
+        .intro-text strong { color: var(--text-1); font-weight: 600; }
+
+        /* Tasto Tema */
+        #btn-theme {
+            position: absolute; right: 0; top: 0;
+            background: var(--btn-bg); color: var(--text-1); border: 1px solid var(--border);
+            width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+            font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all .2s ease; backdrop-filter: blur(10px);
+        }
+        #btn-theme:hover { border-color: var(--text-2); transform: translateY(-2px); }
 
         /* Grid & Cards */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; }
         @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
         
         .card { 
-            background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(255, 255, 255, 0.06); 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
             border-radius: 16px; 
             padding: 30px; 
             text-decoration: none; color: inherit; 
@@ -48,15 +88,16 @@
             backdrop-filter: blur(10px);
         }
         .card:hover { 
-            border-color: #4FD1C5; 
+            border-color: var(--accent); 
             transform: translateY(-4px); 
-            background: rgba(255, 255, 255, 0.04);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            background: var(--card-hover);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
         .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
-        .card h2 { font-size: 18px; margin: 0; color: #EDEFF2; font-weight: 600; }
+        .card h2 { font-size: 18px; margin: 0; color: var(--text-1); font-weight: 600; transition: color 0.2s ease;}
+        .card:hover h2 { color: var(--accent); }
         .card-icon { font-size: 20px; }
-        .card p { font-size: 14px; color: #8A8F98; margin: 0 0 24px 0; flex-grow: 1; }
+        .card p { font-size: 14px; color: var(--text-2); margin: 0 0 24px 0; flex-grow: 1; }
         
         /* Tags */
         .tags-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
@@ -69,12 +110,13 @@
         .tag-orange { background: rgba(255, 122, 51, 0.1); color: #FF9F45; border: 1px solid rgba(255, 122, 51, 0.2); }
         .tag-purple { background: rgba(185, 140, 255, 0.1); color: #B98CFF; border: 1px solid rgba(185, 140, 255, 0.2); }
         
-        footer { margin-top: 60px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #575C64; }
+        footer { margin-top: 60px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-2); }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
+            <button id="btn-theme" onclick="toggleTheme()" title="Cambia tema">☀️</button>
             <span class="eyebrow">Professional Portfolio</span>
             <h1>Business Operations & Ops Excellence Toolkit</h1>
             <p class="intro-text">
@@ -153,5 +195,28 @@
         
         <footer>Built with Python, Plotly & Vanilla JS &copy; Giacomo Cameran</footer>
     </div>
+
+    <script>
+        // Design System Logic (Toggle Theme)
+        let DARK = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        function applyTheme() {
+            const btn = document.getElementById('btn-theme');
+            if (DARK) { 
+                document.body.classList.remove('light-mode'); 
+                btn.textContent = '☀️'; 
+            } else { 
+                document.body.classList.add('light-mode');    
+                btn.textContent = '🌙';  
+            }
+        }
+        
+        function toggleTheme() { 
+            DARK = !DARK; 
+            applyTheme(); 
+        }
+        
+        applyTheme();
+    </script>
 </body>
 </html>
