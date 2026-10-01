@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ops Excellence Portfolio | Giacomo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0B0D10; color: #EDEFF2; font-family: 'Space Grotesk', sans-serif; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { max-width: 900px; padding: 40px 20px; width: 100%; }
+        h1 { font-size: 32px; margin-bottom: 10px; font-weight: 700; }
+        p.subtitle { color: #8A8F98; font-family: 'IBM Plex Mono', monospace; font-size: 13px; margin-bottom: 40px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s ease; display: block; }
+        .card:hover { border-color: #4FD1C5; transform: translateY(-2px); background: rgba(255,255,255,0.05); }
+        .card h2 { font-size: 18px; margin: 0 0 10px 0; color: #4FD1C5; }
+        .card p { font-size: 14px; color: #8A8F98; margin: 0; line-height: 1.5; }
+        .tag { display: inline-block; background: rgba(79, 209, 197, 0.15); color: #4FD1C5; font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 4px 8px; border-radius: 4px; margin-top: 15px; font-weight: 600;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Business Operations Toolkit</h1>
+        <p class="subtitle">Operations Controlling & Python Automation Portfolio</p>
+        
+        <div class="grid">
+            <a href="./01_plant_efficiency/" class="card">
+                <h2>01. Plant Efficiency Dashboard</h2>
+                <p>Bottom-up daily tracking of standard vs actual variances at the machine level.</p>
+                <div class="tag">SPA / SERVERLESS</div>
+            </a>
+            <a href="./02_supply_chain_deck/" class="card">
+                <h2>02. Supply Chain Command Deck</h2>
+                <p>Top-down executive SVG gauge dashboard aggregating multiple manufacturing plants.</p>
+                <div class="tag">DATA VIZ / SVG</div>
+            </a>
+            <a href="./03_extra_consumptions/" class="card">
+                <h2>03. Extra Consumptions Tracker</h2>
+                <p>Interactive tracking of Scrap, Extrapicking, and negative variances.</p>
+                <div class="tag">ANALYTICS</div>
+            </a>
+            <a href="./04_indirect_materials_analytics/" class="card">
+                <h2>04. Indirect Materials Analytics</h2>
+                <p>In-browser BI tool with sub-millisecond search engine for tracking indirect costs.</p>
+                <div class="tag">CLIENT-SIDE SEARCH</div>
+            </a>
+            <a href="https://github.com/giacomocame/business-operations-toolkit/tree/main/05_desktop_command_deck" target="_blank" class="card">
+                <h2>05. Desktop App Launcher</h2>
+                <p>Native Python CustomTkinter GUI featuring multithreading and thread-safe console logging.</p>
+                <div class="tag">DESKTOP GUI / PYTHON</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
