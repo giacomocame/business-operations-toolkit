@@ -1,222 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Operations Toolkit | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; }
-        :root { color-scheme: dark; }
-        body.light-mode { color-scheme: light; }
-        
-        /* Variabili dinamiche derivate dal tuo Design System */
-        :root {
-            --bg-deep: #0B0D10;
-            --ago-hue: rgba(79, 209, 197, 0.12);
-            --ped-hue: rgba(255, 122, 51, 0.12);
-            --text-1: #EDEFF2;
-            --text-2: #8A8F98;
-            --border: rgba(255, 255, 255, 0.08);
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-hover: rgba(255, 255, 255, 0.05);
-            --accent: #4FD1C5;
-            --btn-bg: rgba(255, 255, 255, 0.06);
-        }
-        body.light-mode {
-            --bg-deep: #F2F0EA;
-            --ago-hue: rgba(62, 124, 177, 0.12);
-            --ped-hue: rgba(201, 132, 62, 0.12);
-            --text-1: #17181A;
-            --text-2: #5B5F66;
-            --border: rgba(0, 0, 0, 0.09);
-            --card-bg: rgba(0, 0, 0, 0.025);
-            --card-hover: rgba(0, 0, 0, 0.05);
-            --accent: #2F8F86;
-            --btn-bg: rgba(0, 0, 0, 0.04);
-        }
-        
-        body { 
-            margin: 0; padding: 0; 
-            background-color: var(--bg-deep); color: var(--text-1); 
-            font-family: 'Space Grotesk', sans-serif; 
-            line-height: 1.6;
-            position: relative;
-            min-height: 100vh;
-            transition: background-color 0.35s ease, color 0.35s ease;
-        }
-        body::before {
-            content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background: 
-                radial-gradient(circle at 15% 10%, var(--ago-hue), transparent 45%),
-                radial-gradient(circle at 85% 90%, var(--ped-hue), transparent 45%);
-            transition: background 0.35s ease;
-        }
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 24px; }
-        
-        /* Header & Intro */
-        header { margin-bottom: 50px; border-bottom: 1px solid var(--border); padding-bottom: 30px; position: relative; }
-        .eyebrow { font-family: 'IBM Plex Mono', monospace; color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 10px; display: block; }
-        h1 { font-size: 38px; margin: 0 0 16px 0; font-weight: 700; letter-spacing: -0.02em; }
-        .intro-text { color: var(--text-2); font-size: 16px; max-width: 800px; }
-        .intro-text strong { color: var(--text-1); font-weight: 600; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giacomo Cameran · Ops & Finance Automation</title>
+<meta name="description" content="Reporting tools that replace manual Excel workflows with automated, shareable dashboards. Built in Python and JavaScript.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #0B0D10;
+  --grad-1: rgba(79, 209, 197, 0.12);
+  --grad-2: rgba(255, 122, 51, 0.12);
+  --text-main: #EDEFF2;
+  --text-muted: #8A8F98;
+  --text-dark: #0B0D10;
+  --border: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-hover: rgba(255, 255, 255, 0.04);
+  --accent: #4FD1C5;
+  --accent-hover: #3DD68C;
+  --note-bg: rgba(255, 191, 0, 0.05);
+  --note-border: rgba(255, 191, 0, 0.2);
+  --note-text: #FBBF24;
+}
 
-        /* Tasto Tema */
-        #btn-theme {
-            position: absolute; right: 0; top: 0;
-            background: var(--btn-bg); color: var(--text-1); border: 1px solid var(--border);
-            width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
-            font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all .2s ease; backdrop-filter: blur(10px);
-        }
-        #btn-theme:hover { border-color: var(--text-2); transform: translateY(-2px); }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background-color: var(--bg-deep); color: var(--text-main);
+  font-family: 'Space Grotesk', sans-serif; line-height: 1.6;
+  padding: 0 0 60px 0; position: relative; min-height: 100vh;
+}
+/* Effetto glow di sfondo */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background: 
+      radial-gradient(circle at 15% 10%, var(--grad-1), transparent 45%),
+      radial-gradient(circle at 85% 90%, var(--grad-2), transparent 45%);
+}
 
-        /* Grid & Cards */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
-        
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 16px; 
-            padding: 30px; 
-            text-decoration: none; color: inherit; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            display: flex; flex-direction: column;
-            backdrop-filter: blur(10px);
-        }
-        .card:hover { 
-            border-color: var(--accent); 
-            transform: translateY(-4px); 
-            background: var(--card-hover);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-        .card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
-        .card h2 { font-size: 18px; margin: 0; color: var(--text-1); font-weight: 600; transition: color 0.2s ease;}
-        .card:hover h2 { color: var(--accent); }
-        .card-icon { font-size: 20px; }
-        .card p { font-size: 14px; color: var(--text-2); margin: 0 0 24px 0; flex-grow: 1; }
-        
-        /* Tags */
-        .tags-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
-        .tag { 
-            display: inline-block; 
-            font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
-            padding: 6px 10px; border-radius: 6px; letter-spacing: 0.05em;
-        }
-        .tag-teal { background: rgba(79, 209, 197, 0.1); color: #4FD1C5; border: 1px solid rgba(79, 209, 197, 0.2); }
-        .tag-orange { background: rgba(255, 122, 51, 0.1); color: #FF9F45; border: 1px solid rgba(255, 122, 51, 0.2); }
-        .tag-purple { background: rgba(185, 140, 255, 0.1); color: #B98CFF; border: 1px solid rgba(185, 140, 255, 0.2); }
-        
-        footer { margin-top: 60px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-2); }
-    </style>
+.wrap { max-width: 960px; margin: 0 auto; padding: 60px 24px; }
+
+/* Typography */
+h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 16px 0; }
+h2 { font-size: 24px; font-weight: 600; margin: 0 0 16px 0; color: var(--text-main); }
+.lead { font-size: 18px; color: var(--text-muted); max-width: 65ch; margin: 0 0 24px 0; }
+.lead strong { color: var(--text-main); font-weight: 600; }
+
+/* Links Header */
+.links { display: flex; flex-wrap: wrap; gap: 16px; margin: 0 0 40px 0; padding: 0; list-style: none; }
+.links a {
+  color: var(--accent); text-decoration: none; font-family: 'IBM Plex Mono', monospace; 
+  font-size: 13px; font-weight: 600; padding: 6px 12px; 
+  border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg);
+  transition: all 0.2s ease;
+}
+.links a:hover { border-color: var(--accent); background: rgba(79, 209, 197, 0.1); }
+
+/* Note Box */
+.note {
+  background: var(--note-bg); border: 1px solid var(--note-border); border-radius: 12px;
+  padding: 16px 20px; font-size: 14px; color: var(--note-text); margin: 0 0 50px 0;
+  backdrop-filter: blur(10px); display: flex; align-items: flex-start; gap: 12px;
+}
+.note::before { content: 'ℹ️'; font-size: 16px; }
+
+/* Project Cards (Glassmorphism) */
+.project {
+  display: grid; grid-template-columns: 320px 1fr; gap: 32px;
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px;
+  padding: 32px; margin-bottom: 32px; backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.project:hover { border-color: var(--accent); transform: translateY(-4px); background: var(--card-hover); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); }
+
+/* Images */
+.shot { margin: 0; aspect-ratio: 16 / 10; border: 1px solid var(--border); border-radius: 12px; background: rgba(0,0,0,0.3); overflow: hidden; position: relative; }
+.shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.5s ease; }
+.project:hover .shot img { transform: scale(1.03); }
+
+/* DL List for Problem/Solution */
+dl { margin: 0 0 24px 0; }
+dt { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 16px; margin-bottom: 4px; }
+dt:first-child { margin-top: 0; }
+dd { margin: 0; color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+
+/* Tech Stack Tags */
+.stack { margin: 0 0 24px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.stack span { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+
+/* Buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.btn {
+  background: var(--accent); color: var(--text-dark); text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 600;
+  padding: 10px 20px; border-radius: 8px; transition: all 0.2s ease;
+}
+.btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--text-main); border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
+
+footer { margin-top: 60px; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-muted); padding-top: 30px; border-top: 1px solid var(--border); }
+
+@media (max-width: 800px) {
+  .project { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+  .shot { max-height: 250px; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <button id="btn-theme" onclick="toggleTheme()" title="Cambia tema">☀️</button>
-            <span class="eyebrow">Professional Portfolio</span>
-            <h1>Business Operations & Ops Excellence Toolkit</h1>
-            <p class="intro-text">
-                The goal of these tools is to bridge the gap between raw data and executive decision-making. 
-                I focus on replacing heavy, legacy Excel workflows with <strong>fast, interactive, and serverless web applications</strong>.
-                All tools below are built entirely with Python (Pandas/Plotly) and Vanilla JS, demonstrating automated ETL pipelines and offline hydration.
-            </p>
-        </header>
+<div class="wrap">
+  <header>
+    <h1>Giacomo Cameran</h1>
+    <p class="lead">
+      <strong>I have built reporting tools</strong> that turn plant and cost data into dashboards people can open and act on, replacing manual Excel work with automated, shareable pages. <strong>Background in finance and controlling</strong>, with Python and SAP data workflows.
+    </p>
+    <ul class="links">
+      <li><a href="https://www.linkedin.com/in/giacomocameran/" target="_blank">LinkedIn</a></li>
+      <li><a href="mailto:giacomo.camera@gmail.com">Email</a></li>
+      <li><a href="https://github.com/giacomocame/business-operations-toolkit" target="_blank">GitHub Repo</a></li>
+    </ul>
+  </header>
 
-        <div class="grid">
-            <!-- Project 01 -->
-            <a href="./01_plant_efficiency/" class="card">
-                <div class="card-header">
-                    <h2>01. Plant Efficiency Dashboard</h2>
-                    <span class="card-icon">🏭</span>
-                </div>
-                <p>Bottom-up daily tracking of standard vs actual variances at the machine and cost-center level. Replaces local macro-heavy Excel files.</p>
-                <div class="tags-wrap">
-                    <span class="tag tag-teal">SERVERLESS SPA</span>
-                    <span class="tag tag-purple">PANDAS</span>
-                </div>
-            </a>
+  <div class="note">
+    All data shown here is strictly synthetic. Companies, plants, machines, and figures are invented. Every tool was rebuilt from scratch for this portfolio to demonstrate architectural and analytical capabilities without exposing proprietary information.
+  </div>
 
-            <!-- Project 02 -->
-            <a href="./02_supply_chain_deck/" class="card">
-                <div class="card-header">
-                    <h2>02. Supply Chain Command Deck</h2>
-                    <span class="card-icon">🌐</span>
-                </div>
-                <p>Top-down executive SVG gauge dashboard aggregating multiple manufacturing plants to extract global supply chain efficiency metrics.</p>
-                <div class="tags-wrap">
-                    <span class="tag tag-orange">CUSTOM DATA VIZ</span>
-                    <span class="tag tag-teal">SVG GRAPHICS</span>
-                </div>
-            </a>
-
-            <!-- Project 03 -->
-            <a href="./03_extra_consumptions/" class="card">
-                <div class="card-header">
-                    <h2>03. Extra Consumptions Tracker</h2>
-                    <span class="card-icon">📉</span>
-                </div>
-                <p>Interactive tracking of Scrap, Extrapicking, and negative variances with automated root-cause extraction and expandable cascade tables.</p>
-                <div class="tags-wrap">
-                    <span class="tag tag-purple">COST CONTROLLING</span>
-                    <span class="tag tag-teal">SERVERLESS SPA</span>
-                </div>
-            </a>
-
-            <!-- Project 04 -->
-            <a href="./04_indirect_materials_analytics/" class="card">
-                <div class="card-header">
-                    <h2>04. Indirect Materials Analytics</h2>
-                    <span class="card-icon">📦</span>
-                </div>
-                <p>In-browser BI tool with sub-millisecond client-side search engine for tracking indirect manufacturing costs and specific operator actions.</p>
-                <div class="tags-wrap">
-                    <span class="tag tag-orange">CLIENT-SIDE SEARCH</span>
-                    <span class="tag tag-purple">PANDAS</span>
-                </div>
-            </a>
-
-            <!-- Project 05 -->
-            <a href="https://github.com/giacomocame/business-operations-toolkit/tree/main/05_desktop_command_deck" target="_blank" class="card">
-                <div class="card-header">
-                    <h2>05. Desktop App Launcher</h2>
-                    <span class="card-icon">💻</span>
-                </div>
-                <p>Native Python CustomTkinter GUI featuring multithreading and thread-safe console logging for the internal Operations team.</p>
-                <div class="tags-wrap">
-                    <span class="tag tag-teal">DESKTOP GUI</span>
-                    <span class="tag tag-orange">MULTITHREADING</span>
-                </div>
-            </a>
+  <main>
+    <!-- 01 -->
+    <article class="project">
+      <figure class="shot">
+        <img src="screenshots/01.png" alt="Plant efficiency dashboard" loading="lazy">
+      </figure>
+      <div class="content">
+        <h2>01. Plant Efficiency Dashboard</h2>
+        <dl>
+          <dt>Problem</dt><dd>Daily efficiency reporting relied on macro-heavy Excel files rebuilt by hand, causing data latency and bottlenecks.</dd>
+          <dt>Solution</dt><dd>A Python pipeline generates one self-contained page with standard vs actual hours, efficiency against budget, and € variance, from daily to YTD.</dd>
+          <dt>Result</dt><dd>A plant meeting opens one instantly-loading link instead of downloading a spreadsheet.</dd>
+        </dl>
+        <div class="stack">
+          <span>PYTHON</span><span>PANDAS</span><span>PLOTLY</span><span>VANILLA JS</span>
         </div>
-        
-        <footer>Built with Python, Plotly & Vanilla JS &copy; Giacomo Cameran</footer>
-    </div>
+        <div class="actions">
+          <a class="btn" href="./01_plant_efficiency/">View Dashboard</a>
+          <a class="btn btn-outline" href="https://github.com/giacomocame/business-operations-toolkit/tree/main/01_plant_efficiency" target="_blank">Code</a>
+        </div>
+      </div>
+    </article>
 
-    <script>
-        // Design System Logic (Toggle Theme)
-        let DARK = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        function applyTheme() {
-            const btn = document.getElementById('btn-theme');
-            if (DARK) { 
-                document.body.classList.remove('light-mode'); 
-                btn.textContent = '☀️'; 
-            } else { 
-                document.body.classList.add('light-mode');    
-                btn.textContent = '🌙';  
-            }
-        }
-        
-        function toggleTheme() { 
-            DARK = !DARK; 
-            applyTheme(); 
-        }
-        
-        applyTheme();
-    </script>
+    <!-- 02 -->
+    <article class="project">
+      <figure class="shot">
+        <img src="screenshots/02.png" alt="Supply chain deck" loading="lazy">
+      </figure>
+      <div class="content">
+        <h2>02. Supply Chain Command Deck</h2>
+        <dl>
+          <dt>Problem</dt><dd>Executive management needed one true efficiency figure per plant without opening individual localized reports.</dd>
+          <dt>Solution</dt><dd>Custom SVG vector gauges roll several independent plants up into a group view, interactively switchable between day, week, month, and YTD.</dd>
+          <dt>Result</dt><dd>Cross-plant performance can be compared globally at a single glance.</dd>
+        </dl>
+        <div class="stack">
+          <span>PYTHON</span><span>CUSTOM SVG</span><span>MATH/GEOMETRY</span>
+        </div>
+        <div class="actions">
+          <a class="btn" href="./02_supply_chain_deck/">View Command Deck</a>
+          <a class="btn btn-outline" href="https://github.com/giacomocame/business-operations-toolkit/tree/main/02_supply_chain_deck" target="_blank">Code</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="project">
+      <figure class="shot">
+        <img src="screenshots/03.png" alt="Material variance dashboard" loading="lazy">
+      </figure>
+      <div class="content">
+        <h2>03. Extra Consumptions Tracker</h2>
+        <dl>
+          <dt>Problem</dt><dd>Scrap and extra picking costs are often buried inside the total material variance, making root-cause analysis difficult.</dd>
+          <dt>Solution</dt><dd>Total variance is mathematically split into scrap, extra picks, and pure consumption by material category, with expandable rows down to individual movements.</dd>
+          <dt>Result</dt><dd>It is immediately clear which categories drive overconsumption and by how many euros.</dd>
+        </dl>
+        <div class="stack">
+          <span>COST CONTROLLING</span><span>PANDAS</span><span>SERVERLESS SPA</span>
+        </div>
+        <div class="actions">
+          <a class="btn" href="./03_extra_consumptions/">View Tracker</a>
+          <a class="btn btn-outline" href="https://github.com/giacomocame/business-operations-toolkit/tree/main/03_extra_consumptions" target="_blank">Code</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="project">
+      <figure class="shot">
+        <img src="screenshots/04.png" alt="Indirect materials analytics" loading="lazy">
+      </figure>
+      <div class="content">
+        <h2>04. Indirect Materials Analytics</h2>
+        <dl>
+          <dt>Problem</dt><dd>Indirect material spend is scattered across many operations and material groups, making specific transaction retrieval painfully slow.</dd>
+          <dt>Solution</dt><dd>Cost breakdown by area and material group with an indexed, sub-millisecond search engine running entirely in the browser.</dd>
+          <dt>Result</dt><dd>Tracing a specific cost back to its department, material group, and operator takes less than a second.</dd>
+        </dl>
+        <div class="stack">
+          <span>DATA INDEXING</span><span>PANDAS</span><span>JS ALGORITHMS</span>
+        </div>
+        <div class="actions">
+          <a class="btn" href="./04_indirect_materials_analytics/">View Analytics</a>
+          <a class="btn btn-outline" href="https://github.com/giacomocame/business-operations-toolkit/tree/main/04_indirect_materials_analytics" target="_blank">Code</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="project">
+      <figure class="shot">
+        <img src="screenshots/05.png" alt="Desktop launcher window" loading="lazy">
+      </figure>
+      <div class="content">
+        <h2>05. Desktop App Launcher</h2>
+        <dl>
+          <dt>Problem</dt><dd>Factory-floor colleagues without Python environments still need a centralized way to trigger the heavy ETL scripts.</dd>
+          <dt>Solution</dt><dd>A native Windows desktop application that manages the ETL extraction in background threads and streams a live log console.</dd>
+          <dt>Result</dt><dd>The UI never freezes during heavy SQL/Pandas workloads, allowing 1-click execution for non-technical staff.</dd>
+        </dl>
+        <div class="stack">
+          <span>CUSTOMTKINTER</span><span>MULTITHREADING</span><span>DESKTOP GUI</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-outline" href="https://github.com/giacomocame/business-operations-toolkit/tree/main/05_desktop_command_deck" target="_blank">View App Details & Code</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>&copy; 2026 Giacomo Cameran. Engineered with Python & Vanilla JavaScript.</footer>
+</div>
 </body>
 </html>
